@@ -76,9 +76,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "your-google-verification-code",
-  },
+  // verification: {
+  //   google: "ADD_YOUR_GOOGLE_VERIFICATION_CODE_HERE",
+  // },
   alternates: {
     canonical: siteConfig.url,
   },

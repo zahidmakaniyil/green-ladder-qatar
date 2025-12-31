@@ -1,8 +1,16 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import SubHeader from '@/app/components/SubHeader';
 import { ArrowRightIcon } from '@/app/components/Icons';
 import { generateMetadata as genMeta } from '@/app/lib/seo';
+
+// Gallery images
+const galleryImages = Array.from({ length: 12 }, (_, i) => ({
+  id: i + 1,
+  src: `/images/gallery/gallery-${i + 1}.webp`,
+  alt: `Green Ladder Qatar Project ${i + 1}`,
+}));
 
 export const metadata: Metadata = genMeta({
   title: 'Gallery',
@@ -27,6 +35,7 @@ export default function GalleryPage() {
         title="Gallery"
         breadcrumbs={[{ label: 'Gallery' }]}
         subtitle="Browse through our collection of project photos showcasing our quality workmanship."
+        backgroundImage="/images/gallery/gallery-bg.webp"
       />
 
       <section className="section bg-white">
@@ -55,22 +64,24 @@ export default function GalleryPage() {
             ))}
           </div>
 
-          {/* Gallery Grid - Placeholder */}
+          {/* Gallery Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {Array.from({ length: 12 }).map((_, i) => (
+            {galleryImages.map((image) => (
               <div
-                key={i}
-                className="aspect-square bg-gradient-to-br from-primary-100 to-primary-200 rounded-xl overflow-hidden group cursor-pointer"
+                key={image.id}
+                className="aspect-square rounded-xl overflow-hidden group cursor-pointer relative"
               >
-                <div className="w-full h-full flex items-center justify-center relative">
-                  <div className="absolute inset-0 bg-dark-bg/0 group-hover:bg-dark-bg/60 transition-colors flex items-center justify-center">
-                    <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity font-medium">
-                      View
-                    </span>
-                  </div>
-                  <div className="w-16 h-16 bg-white/30 rounded-xl flex items-center justify-center">
-                    <span className="text-2xl font-bold text-primary">{String(i + 1).padStart(2, '0')}</span>
-                  </div>
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-dark-bg/0 group-hover:bg-dark-bg/60 transition-colors flex items-center justify-center">
+                  <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity font-medium">
+                    View
+                  </span>
                 </div>
               </div>
             ))}

@@ -1,8 +1,9 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import SubHeader from '@/app/components/SubHeader';
-import { ArrowRightIcon, ShieldCheckIcon } from '@/app/components/Icons';
+import { ArrowRightIcon } from '@/app/components/Icons';
 import { blogPosts, siteConfig } from '@/app/lib/data';
 import { generateMetadata as genMeta, getArticleSchema, getBreadcrumbSchema } from '@/app/lib/seo';
 
@@ -76,6 +77,7 @@ export default async function BlogDetailPage({ params }: Props) {
           { label: 'Blog', href: '/blogs' },
           { label: post.title }
         ]}
+        backgroundImage={post.image}
       />
 
       <article className="section bg-white">
@@ -91,11 +93,14 @@ export default async function BlogDetailPage({ params }: Props) {
             </div>
 
             {/* Featured Image */}
-            <div className="h-64 md:h-96 rounded-2xl mb-8 overflow-hidden">
-              <img
+            <div className="h-64 md:h-96 rounded-2xl mb-8 overflow-hidden relative">
+              <Image
                 src={post.image}
                 alt={post.title}
-                className="w-full h-full object-cover"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 768px"
+                className="object-cover"
               />
             </div>
 
@@ -182,11 +187,13 @@ export default async function BlogDetailPage({ params }: Props) {
                 href={`/blogs/${relPost.slug}`}
                 className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow group border border-border"
               >
-                <div className="h-40 overflow-hidden">
-                  <img
+                <div className="h-40 overflow-hidden relative">
+                  <Image
                     src={relPost.image}
                     alt={relPost.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 <div className="p-5">

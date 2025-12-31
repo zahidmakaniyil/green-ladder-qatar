@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import SubHeader from '@/app/components/SubHeader';
-import { ArrowRightIcon, ShieldCheckIcon } from '@/app/components/Icons';
+import { ArrowRightIcon } from '@/app/components/Icons';
 import { services } from '@/app/lib/data';
 import { generateMetadata as genMeta } from '@/app/lib/seo';
 import ServiceCard from '@/app/components/ServiceCard';
@@ -15,14 +16,24 @@ export const metadata: Metadata = genMeta({
 
 export default function ServicesPage() {
   const featuredService = services.find(s => s.slug === 'duct-sealing-system');
-  const otherServices = services.filter(s => s.slug !== 'duct-sealing-system');
+  // Sort: featured services first, then by priority
+  const otherServices = services
+    .filter(s => s.slug !== 'duct-sealing-system')
+    .sort((a, b) => {
+      // Featured items come first
+      if (a.featured && !b.featured) return -1;
+      if (!a.featured && b.featured) return 1;
+      // Then sort by priority
+      return a.priority - b.priority;
+    });
 
   return (
     <>
-      <SubHeader 
+      <SubHeader
         title="Our Services"
         breadcrumbs={[{ label: 'Services' }]}
         subtitle="Comprehensive specialized contracting solutions for all your construction and waterproofing needs."
+        backgroundImage="/images/services/services-bg.webp"
       />
 
       {/* Featured Service Banner */}
@@ -38,7 +49,7 @@ export default function ServicesPage() {
                 <p className="text-white/80 text-lg leading-relaxed mb-6">
                   {featuredService.description}
                 </p>
-                <Link 
+                <Link
                   href={`/services/${featuredService.slug}`}
                   className="btn btn-white"
                 >
@@ -47,8 +58,15 @@ export default function ServicesPage() {
                 </Link>
               </div>
               <div className="flex justify-center">
-                <div className="w-48 h-48 bg-white/10 rounded-3xl flex items-center justify-center backdrop-blur-sm border border-white/20">
-                  <ShieldCheckIcon size={80} className="text-white" />
+                <div className="w-64 h-64 lg:w-80 lg:h-80 rounded-3xl overflow-hidden border-4 border-white/20 shadow-2xl relative">
+                  <Image
+                    src="/images/services/duct-sealing-system.webp"
+                    alt="Duct Sealing System - Offshore & Onshore"
+                    fill
+                    sizes="(max-width: 1024px) 256px, 320px"
+                    className="object-cover"
+                    priority
+                  />
                 </div>
               </div>
             </div>
@@ -63,7 +81,7 @@ export default function ServicesPage() {
             <span className="section-label">What We Offer</span>
             <h2>All Our Services</h2>
             <p>
-              Professional contracting services delivered with expertise, 
+              Professional contracting services delivered with expertise,
               quality materials, and commitment to excellence.
             </p>
           </div>
@@ -81,7 +99,7 @@ export default function ServicesPage() {
         <div className="container text-center">
           <h2 className="text-white mb-4">Need a Custom Solution?</h2>
           <p className="text-white/70 mb-8 max-w-2xl mx-auto">
-            Can&apos;t find what you&apos;re looking for? Contact us to discuss your specific 
+            Can&apos;t find what you&apos;re looking for? Contact us to discuss your specific
             requirements. We offer tailored solutions for unique project needs.
           </p>
           <Link href="/contact-us" className="btn btn-secondary">

@@ -85,7 +85,7 @@ export default function Header() {
           MAIN HEADER
       ======================================== */}
       <header
-        className={`sticky top-0 z-50 bg-white transition-shadow duration-300 ${isScrolled ? 'shadow-lg' : 'shadow-sm'
+        className={`sticky top-0 z-50 bg-[#0f172a] md:bg-white transition-shadow duration-300 ${isScrolled ? 'shadow-lg' : 'shadow-sm'
           }`}
       >
         <div className="container">
@@ -110,8 +110,8 @@ export default function Header() {
                   key={item.name}
                   href={item.href}
                   className={`px-4 py-2 text-[15px] font-medium rounded-lg transition-all duration-200 ${isActive(item.href)
-                      ? 'text-[#17b457] bg-[#17b457]/10'
-                      : 'text-gray-700 hover:text-[#17b457] hover:bg-gray-50'
+                    ? 'text-[#17b457] bg-[#17b457]/10'
+                    : 'text-gray-700 hover:text-[#17b457] hover:bg-gray-50'
                     }`}
                 >
                   {item.name}
@@ -139,15 +139,15 @@ export default function Header() {
               >
                 <div className="w-5 h-4 flex flex-col justify-between">
                   <span
-                    className={`block h-0.5 bg-gray-700 rounded-full transform transition-all duration-300 origin-center ${isMobileMenuOpen ? 'rotate-45 translate-y-[7px]' : ''
+                    className={`block h-0.5 bg-white md:bg-gray-700 rounded-full transform transition-all duration-300 origin-center ${isMobileMenuOpen ? 'rotate-45 translate-y-[7px]' : ''
                       }`}
                   />
                   <span
-                    className={`block h-0.5 bg-gray-700 rounded-full transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0 scale-0' : ''
+                    className={`block h-0.5 bg-white md:bg-gray-700 rounded-full transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0 scale-0' : ''
                       }`}
                   />
                   <span
-                    className={`block h-0.5 bg-gray-700 rounded-full transform transition-all duration-300 origin-center ${isMobileMenuOpen ? '-rotate-45 -translate-y-[7px]' : ''
+                    className={`block h-0.5 bg-white md:bg-gray-700 rounded-full transform transition-all duration-300 origin-center ${isMobileMenuOpen ? '-rotate-45 -translate-y-[7px]' : ''
                       }`}
                   />
                 </div>
@@ -160,7 +160,7 @@ export default function Header() {
             MOBILE/TABLET MENU OVERLAY
         ======================================== */}
         <div
-          className={`lg:hidden fixed inset-0 top-16 sm:top-26 md:top-[62px] bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+          className={`lg:hidden fixed inset-0 top-16 md:top-[104px] bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
             }`}
           onClick={() => setIsMobileMenuOpen(false)}
         />
@@ -169,10 +169,10 @@ export default function Header() {
             MOBILE/TABLET MENU PANEL
         ======================================== */}
         <div
-          className={`lg:hidden fixed top-16 sm:top-26 md:top-[62px] right-0 w-full  h-[calc(100vh-4rem)] bg-white z-50 transform transition-transform duration-300 ease-out shadow-2xl ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          className={`lg:hidden fixed top-16 md:top-[104px] right-0 w-full h-[calc(100vh-4rem)] md:h-[calc(100vh-104px)] bg-white z-50 transform transition-transform duration-300 ease-out shadow-2xl ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
             }`}
         >
-          <div className="h-full flex flex-col">
+          <div className="h-full flex flex-col overflow-y-scroll">
             {/* Navigation Links */}
             <nav className="flex-1 overflow-y-auto py-4 px-4">
               {navigation.main.map((item, index) => (
@@ -181,8 +181,8 @@ export default function Header() {
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`flex items-center justify-between px-4 py-3.5 rounded-xl transition-all duration-200 group ${isActive(item.href)
-                      ? 'text-[#17b457] bg-[#17b457]/10 font-semibold'
-                      : 'text-gray-700 hover:text-[#17b457] hover:bg-[#17b457]/5'
+                    ? 'text-[#17b457] bg-[#17b457]/10 font-semibold'
+                    : 'text-gray-700 hover:text-[#17b457] hover:bg-[#17b457]/5'
                     }`}
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
@@ -196,19 +196,7 @@ export default function Header() {
 
             {/* Bottom Section */}
             <div className="p-4 border-t border-gray-100 bg-gray-50/50">
-              {/* CTA Button */}
-              <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  setIsQuoteModalOpen(true);
-                }}
-                className="w-full flex items-center justify-center gap-2 px-5 py-3.5 text-sm font-semibold text-white bg-gradient-to-r from-[#17b457] to-[#1fcf66] rounded-xl hover:shadow-lg transition-all duration-200"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
-                Get a Free Quote
-              </button>
+
 
               {/* Contact Info */}
               <div className="mt-4 space-y-3">

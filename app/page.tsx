@@ -1,11 +1,19 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { services, stats, siteConfig, blogPosts } from './lib/data';
 import ServiceCard from './components/ServiceCard';
 import { CheckIcon, ArrowRightIcon } from './components/Icons';
 
 export default function HomePage() {
   const featuredService = services.find(s => s.slug === 'duct-sealing-system');
-  const mainServices = services.filter(s => s.priority <= 6);
+  // Sort: featured services first, then by priority (limit to 6)
+  const mainServices = services
+    .sort((a, b) => {
+      if (a.featured && !b.featured) return -1;
+      if (!a.featured && b.featured) return 1;
+      return a.priority - b.priority;
+    })
+    .slice(0, 6);
 
   return (
     <>
@@ -68,7 +76,7 @@ export default function HomePage() {
             </div>
 
             {/* Trust Indicators */}
-            <div className="grid grid-cols-3 gap-4 md:gap-8 mt-14 pt-8 border-t border-white/10 animate-fade-in-up stagger-3 mb-10">
+            {/* <div className="grid grid-cols-3 gap-4 md:gap-8 mt-14 pt-8 border-t border-white/10 animate-fade-in-up stagger-3 mb-10">
               {stats.slice(0, 3).map((stat, index) => (
                 <div key={index} className="text-center">
                   <div className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#07bdd4] to-[#17b457] bg-clip-text text-transparent">
@@ -77,7 +85,7 @@ export default function HomePage() {
                   <div className="text-white/50 text-xs sm:text-sm mt-1">{stat.label}</div>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -100,7 +108,7 @@ export default function HomePage() {
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               {/* Content */}
               <div>
-                <div className="feature-badge mb-6">
+                <div className="feature-badge mb-6 text-white">
                   ⭐ Featured Service
                 </div>
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
@@ -317,11 +325,13 @@ export default function HomePage() {
             {blogPosts.map((post) => (
               <Link key={post.id} href={`/blogs/${post.slug}`} className="block group">
                 <article className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:border-[#07bdd4]/30 transition-all duration-300 h-full flex flex-col">
-                  <div className="aspect-video overflow-hidden">
-                    <img
+                  <div className="aspect-video overflow-hidden relative">
+                    <Image
                       src={post.image}
                       alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
                   <div className="p-5 flex flex-col flex-grow">

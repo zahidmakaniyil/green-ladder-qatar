@@ -1,9 +1,10 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import SubHeader from '@/app/components/SubHeader';
 import { ArrowRightIcon, CheckIcon, ChevronDownIcon } from '@/app/components/Icons';
-import { ServiceIcon, ServiceCardSmall } from '@/app/components/ServiceCard';
+import { ServiceCardSmall } from '@/app/components/ServiceCard';
 import { services, siteConfig } from '@/app/lib/data';
 import { generateMetadata as genMeta, getServiceSchema, getFAQSchema, getBreadcrumbSchema } from '@/app/lib/seo';
 
@@ -76,6 +77,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           { label: service.shortTitle }
         ]}
         subtitle={service.shortDescription}
+        backgroundImage={`/images/services/${service.slug}.webp`}
       />
 
       {/* Hero Section */}
@@ -85,13 +87,10 @@ export default async function ServiceDetailPage({ params }: Props) {
             {/* Main Content */}
             <div className="lg:col-span-2">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary-light rounded-2xl flex items-center justify-center text-white">
-                  <ServiceIcon icon={service.icon} size={32} />
-                </div>
                 <div>
                   <h2 className="text-2xl font-bold">{service.shortTitle}</h2>
                   {service.featured && (
-                    <span className="inline-block bg-accent text-dark-bg px-3 py-1 rounded-full text-xs font-bold mt-1">
+                    <span className="inline-block bg-accent text-white px-3 py-1 rounded-full text-xs font-bold mt-1">
                       ⭐ Featured Service
                     </span>
                   )}
@@ -102,6 +101,18 @@ export default async function ServiceDetailPage({ params }: Props) {
                 <p className="text-lg text-muted mb-6">
                   {service.description}
                 </p>
+
+                {/* Service Image */}
+                <div className="relative h-64 sm:h-80 lg:h-96 rounded-2xl overflow-hidden mb-8">
+                  <Image
+                    src={`/images/services/${service.slug}.webp`}
+                    alt={service.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 66vw"
+                    className="object-cover"
+                    priority
+                  />
+                </div>
 
                 {/* Benefits */}
                 {service.benefits && (

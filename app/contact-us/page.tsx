@@ -40,6 +40,7 @@ export default function ContactPage() {
         title="Contact Us"
         breadcrumbs={[{ label: 'Contact Us' }]}
         subtitle="Get in touch with our team for inquiries, quotes, or any questions about our services."
+        backgroundImage="/images/contact-us/contact-us-bg.webp"
       />
 
       <section className="section bg-white">

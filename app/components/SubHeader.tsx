@@ -10,11 +10,23 @@ interface SubHeaderProps {
   title: string;
   subtitle?: string;
   breadcrumbs: BreadcrumbItem[];
+  backgroundImage?: string;
 }
 
-export default function SubHeader({ title, subtitle, breadcrumbs }: SubHeaderProps) {
+export default function SubHeader({ title, subtitle, breadcrumbs, backgroundImage }: SubHeaderProps) {
   return (
     <section className="relative py-16 md:py-20 bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] overflow-hidden">
+      {/* Background Image (if provided) */}
+      {backgroundImage && (
+        <>
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${backgroundImage})` }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/95 via-[#0f172a]/85 to-[#0f172a]/80" />
+        </>
+      )}
+
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#17b457]/10 rounded-full blur-[120px]"></div>

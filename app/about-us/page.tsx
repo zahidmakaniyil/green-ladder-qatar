@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import SubHeader from '@/app/components/SubHeader';
 import { ArrowRightIcon, UsersIcon, AwardIcon, ClockIcon, StarIcon, ScaleIcon, LightbulbIcon, ShieldCheckIcon } from '@/app/components/Icons';
 import { aboutContent, stats, siteConfig } from '@/app/lib/data';
@@ -15,10 +16,11 @@ export const metadata: Metadata = genMeta({
 export default function AboutPage() {
   return (
     <>
-      <SubHeader 
+      <SubHeader
         title="About Us"
         breadcrumbs={[{ label: 'About Us' }]}
         subtitle="Learn about our story, mission, and commitment to excellence in Qatar's construction industry."
+        backgroundImage="/images/about-us/about-us-bg.webp"
       />
 
       {/* Who We Are Section */}
@@ -34,7 +36,7 @@ export default function AboutPage() {
               <p className="text-muted mb-6">
                 {aboutContent.full}
               </p>
-              
+
               <div className="grid grid-cols-3 gap-4 mt-8">
                 {stats.map((stat, index) => (
                   <div key={index} className="text-center p-4 bg-primary-50 rounded-xl">
@@ -47,16 +49,14 @@ export default function AboutPage() {
 
             <div className="relative">
               <div className="bg-gradient-to-br from-primary-50 to-primary-100 rounded-3xl p-8">
-                <div className="bg-white rounded-2xl p-8 shadow-lg">
-                  <div className="w-20 h-20 bg-gradient-to-br from-primary to-primary-light rounded-2xl flex items-center justify-center mb-6">
-                    <span className="text-white font-bold text-3xl">GL</span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-2">{siteConfig.legalName}</h3>
-                  <p className="text-muted mb-4">Specialized Contracting & Trading Company</p>
-                  <div className="flex items-center gap-2 text-sm text-primary">
-                    <span className="w-3 h-3 bg-primary rounded-full"></span>
-                    Established in Qatar
-                  </div>
+                <div className="rounded-2xl overflow-hidden shadow-lg relative aspect-square">
+                  <Image
+                    src="/images/about-us/about-us.webp"
+                    alt="Green Ladder Qatar - Specialized Contracting Company"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover"
+                  />
                 </div>
               </div>
             </div>
@@ -183,7 +183,7 @@ export default function AboutPage() {
             <div>
               <span className="section-label">Why Us</span>
               <h2 className="mb-6">Why Choose Green Ladder?</h2>
-              
+
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-primary-50 rounded-xl flex items-center justify-center flex-shrink-0">

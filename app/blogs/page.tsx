@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import SubHeader from '@/app/components/SubHeader';
 import { ArrowRightIcon } from '@/app/components/Icons';
 import { blogPosts } from '@/app/lib/data';
@@ -22,6 +23,7 @@ export default function BlogsPage() {
         title="Our Blog"
         breadcrumbs={[{ label: 'Blog' }]}
         subtitle="Latest news, insights, and expert tips from our industry professionals."
+        backgroundImage="/images/blog/blog-bg.webp"
       />
 
       <section className="section bg-white">
@@ -32,12 +34,14 @@ export default function BlogsPage() {
               href={`/blogs/${featuredPost.slug}`}
               className="grid md:grid-cols-2 gap-0 bg-white rounded-2xl overflow-hidden shadow-lg group border border-border"
             >
-              <div className="h-64 md:h-full min-h-[280px] md:min-h-[320px] overflow-hidden">
-                <img 
-                  src={featuredPost.image} 
+              <div className="h-64 md:h-full min-h-[280px] md:min-h-[320px] overflow-hidden relative">
+                <Image
+                  src={featuredPost.image}
                   alt={featuredPost.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  style={{ objectFit: 'cover' }}
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="p-8 flex flex-col justify-center bg-primary-50">
@@ -76,11 +80,13 @@ export default function BlogsPage() {
                 href={`/blogs/${post.slug}`}
                 className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow group border border-border"
               >
-                <div className="h-48 overflow-hidden">
-                  <img 
-                    src={post.image} 
+                <div className="h-48 overflow-hidden relative">
+                  <Image
+                    src={post.image}
                     alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 <div className="p-6">

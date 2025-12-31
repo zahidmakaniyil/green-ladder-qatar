@@ -354,6 +354,7 @@ export const stats = [
   { value: 50, suffix: "+", label: "Skilled Workers" },
   { value: 1980, suffix: "+", label: "Projects" },
   { value: 1000, suffix: "+", label: "Happy Clients" },
+  { value: 10, suffix: "+", label: "Years of Experience" },
 ];
 
 export const whyChooseUs = [
@@ -449,27 +450,27 @@ export const projects = [
     title: "Offshore Platform Duct Sealing",
     category: "Duct Sealing",
     description: "Complete cable penetration sealing for a major offshore oil platform.",
-    image: "/images/projects/project-1.jpg"
+    image: "/images/projects/offshore-platform-duct-sealing.webp"
   },
   {
     id: 2,
     title: "Commercial Building Waterproofing",
     category: "Waterproofing",
     description: "Basement and roof waterproofing for a commercial complex in Doha.",
-    image: "/images/projects/project-2.jpg"
+    image: "/images/projects/commercial-building-waterproofing.webp"
   },
   {
     id: 3,
     title: "Industrial Epoxy Flooring",
     category: "Flooring",
     description: "High-performance epoxy flooring installation for a manufacturing facility.",
-    image: "/images/projects/project-3.jpg"
+    image: "/images/projects/industrial-epoxy-flooring.webp"
   },
   {
     id: 4,
     title: "Structural Strengthening Project",
     category: "Strengthening",
     description: "Carbon fiber reinforcement for a heritage building restoration.",
-    image: "/images/projects/project-4.jpg"
+    image: "/images/projects/structural-strengthening-project.webp"
   }
 ];

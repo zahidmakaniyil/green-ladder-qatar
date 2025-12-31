@@ -22,7 +22,7 @@ export function generateMetadata({
   title,
   description,
   keywords = [],
-  image = '/og-image.jpg',
+  image = '/images/og-image.jpg',
   url = '',
   type = 'website',
   publishedTime,
@@ -103,9 +103,9 @@ export function generateMetadata({
       images: [fullImage],
     },
     
-    verification: {
-      google: 'your-google-verification-code',
-    },
+    // verification: {
+    //   google: 'ADD_YOUR_GOOGLE_VERIFICATION_CODE_HERE',
+    // },
     
     category: 'Construction Services',
   };
@@ -119,13 +119,28 @@ export function getOrganizationSchema() {
     name: siteConfig.legalName,
     alternateName: siteConfig.name,
     url: siteConfig.url,
-    logo: `${siteConfig.url}/logo.png`,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${siteConfig.url}/images/logo.png`,
+      width: 200,
+      height: 60,
+    },
     description: siteConfig.description,
+    foundingLocation: {
+      '@type': 'Place',
+      name: 'Doha, Qatar',
+    },
     address: {
       '@type': 'PostalAddress',
       streetAddress: siteConfig.address.street,
       addressLocality: siteConfig.address.city,
       addressCountry: siteConfig.address.country,
+      postalCode: '96917',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 25.2854,
+      longitude: 51.531,
     },
     contactPoint: {
       '@type': 'ContactPoint',
@@ -133,11 +148,19 @@ export function getOrganizationSchema() {
       contactType: 'customer service',
       email: siteConfig.email,
       availableLanguage: ['English', 'Arabic'],
+      areaServed: 'QA',
     },
     sameAs: [
       siteConfig.social.facebook,
       siteConfig.social.instagram,
       siteConfig.social.linkedin,
+    ],
+    knowsAbout: [
+      'Waterproofing',
+      'Duct Sealing',
+      'Structural Strengthening',
+      'Construction',
+      'Fire Protection',
     ],
   };
 }
@@ -149,15 +172,17 @@ export function getLocalBusinessSchema() {
     '@type': 'LocalBusiness',
     '@id': `${siteConfig.url}/#localbusiness`,
     name: siteConfig.legalName,
-    image: `${siteConfig.url}/logo.png`,
+    image: `${siteConfig.url}/images/logo.png`,
     url: siteConfig.url,
     telephone: siteConfig.phone,
     email: siteConfig.email,
+    description: siteConfig.description,
     address: {
       '@type': 'PostalAddress',
       streetAddress: siteConfig.address.street,
       addressLocality: siteConfig.address.city,
       addressCountry: 'QA',
+      postalCode: '96917',
     },
     geo: {
       '@type': 'GeoCoordinates',
@@ -167,7 +192,7 @@ export function getLocalBusinessSchema() {
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Sunday'],
+        dayOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'],
         opens: '08:00',
         closes: '18:00',
       },
@@ -176,6 +201,38 @@ export function getLocalBusinessSchema() {
     areaServed: {
       '@type': 'Country',
       name: 'Qatar',
+    },
+    sameAs: [
+      siteConfig.social.facebook,
+      siteConfig.social.instagram,
+      siteConfig.social.linkedin,
+    ],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Construction Services',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Duct Sealing System',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Waterproofing',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Structural Strengthening',
+          },
+        },
+      ],
     },
   };
 }
@@ -242,15 +299,25 @@ export function getArticleSchema(article: {
   date: string;
   author: string;
   image?: string;
+  modifiedDate?: string;
 }) {
+  const imageUrl = article.image 
+    ? (article.image.startsWith('http') ? article.image : `${siteConfig.url}${article.image}`)
+    : `${siteConfig.url}/images/og-image.jpg`;
+    
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: article.title,
     description: article.description,
-    image: article.image || `${siteConfig.url}/og-image.jpg`,
+    image: {
+      '@type': 'ImageObject',
+      url: imageUrl,
+      width: 1200,
+      height: 630,
+    },
     datePublished: article.date,
-    dateModified: article.date,
+    dateModified: article.modifiedDate || article.date,
     author: {
       '@type': 'Organization',
       name: article.author,
@@ -261,13 +328,18 @@ export function getArticleSchema(article: {
       name: siteConfig.legalName,
       logo: {
         '@type': 'ImageObject',
-        url: `${siteConfig.url}/logo.png`,
+        url: `${siteConfig.url}/images/logo.png`,
+        width: 200,
+        height: 60,
       },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': `${siteConfig.url}/blogs/${article.slug}`,
     },
+    keywords: ['construction', 'Qatar', 'waterproofing', 'duct sealing'],
+    articleSection: 'Construction',
+    inLanguage: 'en',
   };
 }
 
@@ -282,11 +354,6 @@ export function getWebsiteSchema() {
     publisher: {
       '@type': 'Organization',
       name: siteConfig.legalName,
-    },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${siteConfig.url}/search?q={search_term_string}`,
-      'query-input': 'required name=search_term_string',
     },
   };
 }
