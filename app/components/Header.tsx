@@ -169,66 +169,57 @@ export default function Header() {
             MOBILE/TABLET MENU PANEL
         ======================================== */}
         <div
-          className={`lg:hidden fixed top-16 md:top-[104px] right-0 w-full h-[calc(100vh-4rem)] md:h-[calc(100vh-104px)] bg-white z-50 transform transition-transform duration-300 ease-out shadow-2xl ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          className={`lg:hidden fixed top-16 md:top-[104px] right-0 w-full h-[calc(100vh-4rem)] md:h-[calc(100vh-104px)] bg-white z-50 transform transition-transform duration-300 ease-out shadow-2xl overflow-y-auto ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
             }`}
         >
-          <div className="h-full flex flex-col overflow-y-scroll">
-            {/* Navigation Links */}
-            <nav className="flex-1 overflow-y-auto py-4 px-4">
-              {navigation.main.map((item, index) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`flex items-center justify-between px-4 py-3.5 rounded-xl transition-all duration-200 group ${isActive(item.href)
-                    ? 'text-[#17b457] bg-[#17b457]/10 font-semibold'
-                    : 'text-gray-700 hover:text-[#17b457] hover:bg-[#17b457]/5'
-                    }`}
-                  style={{ animationDelay: `${index * 50}ms` }}
-                >
-                  <span className="font-medium">{item.name}</span>
-                  {isActive(item.href) && (
-                    <span className="w-2 h-2 rounded-full bg-[#17b457]"></span>
-                  )}
-                </Link>
-              ))}
-            </nav>
+          {/* Navigation Links */}
+          <nav className="py-4 px-4">
+            {navigation.main.map((item, index) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`flex items-center justify-between px-4 py-3.5 rounded-xl transition-all duration-200 group ${isActive(item.href)
+                  ? 'text-[#17b457] bg-[#17b457]/10 font-semibold'
+                  : 'text-gray-700 hover:text-[#17b457] hover:bg-[#17b457]/5'
+                  }`}
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
+                <span className="font-medium">{item.name}</span>
+                {isActive(item.href) && (
+                  <span className="w-2 h-2 rounded-full bg-[#17b457]"></span>
+                )}
+              </Link>
+            ))}
+          </nav>
 
-            {/* Bottom Section */}
-            <div className="p-4 border-t border-gray-100 bg-gray-50/50">
-
-
-              {/* Contact Info */}
-              <div className="mt-4 space-y-3">
-                <a
-                  href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white hover:bg-[#17b457]/5 transition-colors group"
-                >
-                  <div className="w-10 h-10 rounded-full bg-[#17b457]/10 flex items-center justify-center group-hover:bg-[#17b457] transition-colors">
-                    <PhoneIcon size={18} className="text-[#17b457] group-hover:text-white transition-colors" />
-                  </div>
-                  <div>
-                    <div className="text-xs text-gray-400">Call Us</div>
-                    <div className="text-sm font-semibold text-gray-800">{siteConfig.phone}</div>
-                  </div>
-                </a>
-
-                <a
-                  href={`mailto:${siteConfig.email}`}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white hover:bg-[#07bdd4]/5 transition-colors group"
-                >
-                  <div className="w-10 h-10 rounded-full bg-[#07bdd4]/10 flex items-center justify-center group-hover:bg-[#07bdd4] transition-colors flex-shrink-0">
-                    <MailIcon size={18} className="text-[#07bdd4] group-hover:text-white transition-colors" />
-                  </div>
-                  <div className="min-w-0">
-                    <div className="text-xs text-gray-400">Email Us</div>
-                    <div className="text-sm font-semibold text-gray-800">{siteConfig.email}</div>
-                  </div>
-                </a>
+          {/* Contact Info */}
+          <div className="px-4 pb-4 space-y-3">
+            <a
+              href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-gray-50 hover:bg-[#17b457]/5 transition-colors group"
+            >
+              <div className="w-10 h-10 rounded-full bg-[#17b457]/10 flex items-center justify-center group-hover:bg-[#17b457] transition-colors">
+                <PhoneIcon size={18} className="text-[#17b457] group-hover:text-white transition-colors" />
               </div>
+              <div>
+                <div className="text-xs text-gray-400">Call Us</div>
+                <div className="text-sm font-semibold text-gray-800">{siteConfig.phone}</div>
+              </div>
+            </a>
 
-
-            </div>
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-gray-50 hover:bg-[#07bdd4]/5 transition-colors group"
+            >
+              <div className="w-10 h-10 rounded-full bg-[#07bdd4]/10 flex items-center justify-center group-hover:bg-[#07bdd4] transition-colors flex-shrink-0">
+                <MailIcon size={18} className="text-[#07bdd4] group-hover:text-white transition-colors" />
+              </div>
+              <div className="min-w-0">
+                <div className="text-xs text-gray-400">Email Us</div>
+                <div className="text-sm font-semibold text-gray-800">{siteConfig.email}</div>
+              </div>
+            </a>
           </div>
         </div>
       </header>
