@@ -145,7 +145,7 @@ export default function HomePage() {
               </div>
 
               {/* Image/Visual */}
-              <div className="relative">
+              <div className="relative hidden lg:block">
                 <div className="aspect-square rounded-2xl bg-gradient-to-br from-[#17b457] to-[#07bdd4] p-1">
                   <div className="w-full h-full rounded-xl bg-white flex items-center justify-center overflow-hidden">
                     <div className="text-center p-8">
