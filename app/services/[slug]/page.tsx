@@ -125,28 +125,32 @@ export default async function ServiceDetailPage({ params }: Props) {
                   <div className="mb-8">
                     <h3 className="text-xl font-bold mb-4">Applications</h3>
                     <div className="grid sm:grid-cols-2 gap-4">
-                      <div className="bg-dark-bg text-white rounded-xl p-6">
-                        <h4 className="text-accent font-bold mb-3">Offshore Facilities</h4>
-                        <ul className="space-y-2">
-                          {service.applications.offshore.map((item, i) => (
-                            <li key={i} className="flex items-center gap-2 text-white/80">
-                              <span className="w-1.5 h-1.5 bg-accent rounded-full"></span>
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className="bg-primary-100 rounded-xl p-6">
-                        <h4 className="text-primary font-bold mb-3">Onshore Facilities</h4>
-                        <ul className="space-y-2">
-                          {service.applications.onshore.map((item, i) => (
-                            <li key={i} className="flex items-center gap-2 text-foreground">
-                              <span className="w-1.5 h-1.5 bg-primary rounded-full"></span>
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                      {service.applications.offshore && (
+                        <div className="bg-dark-bg text-white rounded-xl p-6">
+                          <h4 className="text-accent font-bold mb-3">Offshore Facilities</h4>
+                          <ul className="space-y-2">
+                            {service.applications.offshore.map((item, i) => (
+                              <li key={i} className="flex items-center gap-2 text-white/80">
+                                <span className="w-1.5 h-1.5 bg-accent rounded-full"></span>
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      {service.applications.onshore && (
+                        <div className="bg-primary-100 rounded-xl p-6">
+                          <h4 className="text-primary font-bold mb-3">Onshore Facilities</h4>
+                          <ul className="space-y-2">
+                            {service.applications.onshore.map((item, i) => (
+                              <li key={i} className="flex items-center gap-2 text-foreground">
+                                <span className="w-1.5 h-1.5 bg-primary rounded-full"></span>
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}

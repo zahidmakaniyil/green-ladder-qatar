@@ -26,33 +26,35 @@ export default function ServicesPage() {
       />
 
       {/* Featured Service Banner */}
-      <section className="py-16 bg-gradient-to-r from-[#17b457] to-[#07bdd4] text-white">
-        <div className="container">
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            <div>
-              <span className="inline-block bg-white text-[#17b457] px-4 py-1.5 rounded-full text-sm font-bold mb-4">
-                ⭐ Our Specialty
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">{featuredService?.title}</h2>
-              <p className="text-white/80 text-lg leading-relaxed mb-6">
-                {featuredService?.description}
-              </p>
-              <Link 
-                href={`/services/${featuredService?.slug}`}
-                className="btn btn-white"
-              >
-                Learn More About This Service
-                <ArrowRightIcon size={18} />
-              </Link>
-            </div>
-            <div className="flex justify-center">
-              <div className="w-48 h-48 bg-white/10 rounded-3xl flex items-center justify-center backdrop-blur-sm border border-white/20">
-                <ShieldCheckIcon size={80} className="text-white" />
+      {featuredService && (
+        <section className="py-16 bg-gradient-to-r from-[#17b457] to-[#07bdd4] text-white">
+          <div className="container">
+            <div className="grid lg:grid-cols-2 gap-8 items-center">
+              <div>
+                <span className="inline-block bg-white text-[#17b457] px-4 py-1.5 rounded-full text-sm font-bold mb-4">
+                  ⭐ Our Specialty
+                </span>
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">{featuredService.title}</h2>
+                <p className="text-white/80 text-lg leading-relaxed mb-6">
+                  {featuredService.description}
+                </p>
+                <Link 
+                  href={`/services/${featuredService.slug}`}
+                  className="btn btn-white"
+                >
+                  Learn More About This Service
+                  <ArrowRightIcon size={18} />
+                </Link>
+              </div>
+              <div className="flex justify-center">
+                <div className="w-48 h-48 bg-white/10 rounded-3xl flex items-center justify-center backdrop-blur-sm border border-white/20">
+                  <ShieldCheckIcon size={80} className="text-white" />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* All Services Grid */}
       <section className="section bg-white">
