@@ -163,14 +163,14 @@ export default function Footer() {
             <p className="text-gray-500 text-sm text-center md:text-left">
               © {currentYear} {siteConfig.legalName}. All Rights Reserved.
             </p>
-            <div className="flex gap-8 text-sm">
+            {/* <div className="flex gap-8 text-sm">
               <Link href="/privacy-policy" className="text-gray-500 hover:text-white transition-colors">
                 Privacy Policy
               </Link>
               <Link href="/terms-of-service" className="text-gray-500 hover:text-white transition-colors">
                 Terms of Service
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

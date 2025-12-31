@@ -413,7 +413,7 @@ export const blogPosts = [
     title: "The Importance of Duct Sealing in Offshore Facilities",
     excerpt: "Discover why proper duct sealing is critical for safety and efficiency in offshore oil and gas platforms.",
     content: "Cable penetrations are often overlooked but they are critical weak points in any offshore structure...",
-    image: "/images/blog/duct-sealing.jpg",
+    image: "/images/blog/duct_sealing.webp",
     date: "2024-12-15",
     author: "Green Ladder Team",
     category: "Duct Sealing"
@@ -424,7 +424,7 @@ export const blogPosts = [
     title: "Waterproofing Solutions for Qatar's Climate",
     excerpt: "Learn about the best waterproofing practices suited for Qatar's unique weather conditions.",
     content: "Qatar's climate presents unique challenges for building maintenance...",
-    image: "/images/blog/waterproofing.jpg",
+    image: "/images/blog/water-proofing.webp",
     date: "2024-12-10",
     author: "Green Ladder Team",
     category: "Waterproofing"
@@ -435,7 +435,7 @@ export const blogPosts = [
     title: "Fire Safety: Protecting Cable Penetrations",
     excerpt: "Understanding fire-rated sealing systems and their importance in building safety.",
     content: "Fire can spread rapidly through unsealed cable penetrations...",
-    image: "/images/blog/fire-safety.jpg",
+    image: "/images/blog/cable-penetrations.webp",
     date: "2024-12-05",
     author: "Green Ladder Team",
     category: "Fire Safety"

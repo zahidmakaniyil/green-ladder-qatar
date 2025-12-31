@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import SubHeader from '@/app/components/SubHeader';
-import { ArrowRightIcon, ShieldCheckIcon } from '@/app/components/Icons';
+import { ArrowRightIcon } from '@/app/components/Icons';
 import { blogPosts } from '@/app/lib/data';
 import { generateMetadata as genMeta } from '@/app/lib/seo';
 
@@ -30,14 +30,17 @@ export default function BlogsPage() {
           <div className="mb-12">
             <Link
               href={`/blogs/${featuredPost.slug}`}
-              className="grid md:grid-cols-2 gap-8 bg-primary-50 rounded-2xl overflow-hidden group"
+              className="grid md:grid-cols-2 gap-0 bg-white rounded-2xl overflow-hidden shadow-lg group border border-border"
             >
-              <div className="h-64 md:h-auto bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center">
-                <div className="w-24 h-24 bg-primary/20 rounded-2xl flex items-center justify-center">
-                  <ShieldCheckIcon size={48} className="text-primary" />
-                </div>
+              <div className="h-64 md:h-full min-h-[280px] md:min-h-[320px] overflow-hidden">
+                <img 
+                  src={featuredPost.image} 
+                  alt={featuredPost.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  style={{ objectFit: 'cover' }}
+                />
               </div>
-              <div className="p-8 flex flex-col justify-center">
+              <div className="p-8 flex flex-col justify-center bg-primary-50">
                 <span className="inline-block bg-primary text-white px-3 py-1 rounded-full text-xs font-bold mb-4 w-fit">
                   Featured
                 </span>
@@ -73,10 +76,12 @@ export default function BlogsPage() {
                 href={`/blogs/${post.slug}`}
                 className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow group border border-border"
               >
-                <div className="h-48 bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center">
-                  <div className="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center">
-                    <ShieldCheckIcon size={32} className="text-primary" />
-                  </div>
+                <div className="h-48 overflow-hidden">
+                  <img 
+                    src={post.image} 
+                    alt={post.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
                 <div className="p-6">
                   <span className="text-xs text-primary font-medium uppercase tracking-wider">

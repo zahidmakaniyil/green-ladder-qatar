@@ -12,20 +12,27 @@ export default function HomePage() {
       {/* ========================================
           HERO SECTION
       ======================================== */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a]">
-        {/* Animated Background */}
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-full h-full">
-            <div className="absolute top-20 left-10 w-72 h-72 bg-[#17b457]/20 rounded-full blur-[100px] animate-pulse"></div>
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#07bdd4]/20 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }}></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-[#17b457]/10 to-[#07bdd4]/10 rounded-full blur-[150px]"></div>
-          </div>
-          {/* Grid Pattern */}
-          <div className="absolute inset-0 opacity-10" style={{
-            backgroundImage: 'linear-gradient(rgba(7, 189, 212, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(7, 189, 212, 0.3) 1px, transparent 1px)',
-            backgroundSize: '60px 60px'
-          }}></div>
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: 'url(/images/home/hero-bg.webp)' }}
+        />
+
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/95 via-[#0f172a]/85 to-[#0f172a]/75" />
+
+        {/* Animated Color Accents */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-[#17b457]/15 rounded-full blur-[100px] animate-pulse"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#07bdd4]/15 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }}></div>
         </div>
+
+        {/* Grid Pattern Overlay */}
+        <div className="absolute inset-0 opacity-5" style={{
+          backgroundImage: 'linear-gradient(rgba(7, 189, 212, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(7, 189, 212, 0.5) 1px, transparent 1px)',
+          backgroundSize: '60px 60px'
+        }}></div>
 
         <div className="container relative z-10 py-20">
           <div className="max-w-4xl">
@@ -219,13 +226,23 @@ export default function HomePage() {
       {/* ========================================
           ABOUT PREVIEW SECTION
       ======================================== */}
-      <section className="section section-dark relative overflow-hidden">
-        <div className="absolute inset-0">
+      <section className="section relative overflow-hidden">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: 'url(/images/home/qatar-bg.webp)' }}
+        />
+
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-[#0f172a]/90" />
+
+        {/* Gradient Accents */}
+        <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#17b457]/10 to-transparent"></div>
           <div className="absolute bottom-0 left-0 w-1/2 h-full bg-gradient-to-r from-[#07bdd4]/10 to-transparent"></div>
         </div>
 
-        <div className="container relative">
+        <div className="container relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <span className="section-label">About Green Ladder</span>
@@ -298,24 +315,30 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.map((post) => (
-              <Link key={post.id} href={`/blogs/${post.slug}`} className="block">
-                <article className="card group cursor-pointer h-full">
-                  <div className="aspect-video rounded-lg bg-gradient-to-br from-[#17b457]/10 to-[#07bdd4]/10 mb-5 flex items-center justify-center">
-                    <span className="text-4xl">📰</span>
+              <Link key={post.id} href={`/blogs/${post.slug}`} className="block group">
+                <article className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:border-[#07bdd4]/30 transition-all duration-300 h-full flex flex-col">
+                  <div className="aspect-video overflow-hidden">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
                   </div>
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="px-3 py-1 text-xs font-medium bg-[#07bdd4]/10 text-[#07bdd4] rounded-full">
-                      {post.category}
+                  <div className="p-5 flex flex-col flex-grow">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="px-3 py-1 text-xs font-medium bg-[#07bdd4]/10 text-[#07bdd4] rounded-full">
+                        {post.category}
+                      </span>
+                      <span className="text-gray-400 text-sm">{post.date}</span>
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-800 mb-2 group-hover:text-[#17b457] transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="text-gray-500 text-sm line-clamp-2 flex-grow">{post.excerpt}</p>
+                    <span className="inline-flex items-center gap-2 text-[#17b457] font-medium text-sm mt-4 group-hover:gap-3 transition-all">
+                      Read More <ArrowRightIcon size={16} />
                     </span>
-                    <span className="text-gray-400 text-sm">{post.date}</span>
                   </div>
-                  <h3 className="text-lg font-bold text-gray-800 mb-2 group-hover:text-[#17b457] transition-colors line-clamp-2">
-                    {post.title}
-                  </h3>
-                  <p className="text-gray-500 text-sm line-clamp-2">{post.excerpt}</p>
-                  <span className="inline-flex items-center gap-2 text-[#17b457] font-medium text-sm mt-4 group-hover:gap-3 transition-all">
-                    Read More <ArrowRightIcon size={16} />
-                  </span>
                 </article>
               </Link>
             ))}
@@ -332,13 +355,22 @@ export default function HomePage() {
       {/* ========================================
           CTA SECTION
       ======================================== */}
-      <section className="section section-gradient relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#17b457] to-[#07bdd4]"></div>
-        <div className="absolute inset-0 opacity-20" style={{
+      <section className="section relative overflow-hidden">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: 'url(/images/home/start-project.webp)' }}
+        />
+
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#17b457]/90 to-[#07bdd4]/90"></div>
+
+        {/* Pattern Overlay */}
+        <div className="absolute inset-0 opacity-10" style={{
           backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")'
         }}></div>
 
-        <div className="container relative text-center">
+        <div className="container relative z-10 text-center">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
             Ready to Start Your Project?
           </h2>

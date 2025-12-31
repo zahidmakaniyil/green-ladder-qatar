@@ -83,11 +83,13 @@ export default async function BlogDetailPage({ params }: Props) {
               <span className="text-muted text-sm">By {post.author}</span>
             </div>
 
-            {/* Featured Image Placeholder */}
-            <div className="h-64 md:h-96 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl mb-8 flex items-center justify-center">
-              <div className="w-24 h-24 bg-primary/20 rounded-2xl flex items-center justify-center">
-                <ShieldCheckIcon size={48} className="text-primary" />
-              </div>
+            {/* Featured Image */}
+            <div className="h-64 md:h-96 rounded-2xl mb-8 overflow-hidden">
+              <img 
+                src={post.image} 
+                alt={post.title}
+                className="w-full h-full object-cover"
+              />
             </div>
 
             {/* Post Content */}
@@ -173,10 +175,12 @@ export default async function BlogDetailPage({ params }: Props) {
                 href={`/blogs/${relPost.slug}`}
                 className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow group border border-border"
               >
-                <div className="h-40 bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center">
-                  <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center">
-                    <ShieldCheckIcon size={24} className="text-primary" />
-                  </div>
+                <div className="h-40 overflow-hidden">
+                  <img 
+                    src={relPost.image} 
+                    alt={relPost.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
                 <div className="p-5">
                   <span className="text-xs text-primary font-medium uppercase tracking-wider">
